@@ -1,5 +1,6 @@
 import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
 import { withStyles } from "@material-ui/core/styles";
+import styled from "styled-components";
 import { theme } from "../theme/theme";
 
 export const CooltixCheckbox = withStyles({
@@ -12,3 +13,14 @@ export const CooltixCheckbox = withStyles({
   },
   checked: {},
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+
+
+export const ErrorMessageWrapper = styled.div`
+  height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: darkred;
+`;

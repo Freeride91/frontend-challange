@@ -1,31 +1,32 @@
 import styled from "styled-components";
 import { H3 } from "./Typography";
-import { Member } from "../pages/MembersListPage";
+import { Member } from "../pages/MembersList";
 import { Link } from "react-router-dom";
+import { theme } from "../theme/theme";
 
 type MemberCardProps = {
   member: Member;
 };
 
-const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
+const MemberListCard: React.FC<MemberCardProps> = ({ member }) => {
   return (
     <StyledLink to={`/${member.id}`}>
       <StyledMemberCard>
         <img src={member.profilePictureUrl} alt="member" />
-        <H3 className="mt-12">
+        <StyledName className="mt-12">
           {member.firstName} {member.lastName}
-        </H3>
+        </StyledName>
         <StyledAddressBox>
           <p className="mt-16">{member.address.state}</p>
-          <p className="details mt-12">{member.address.addressLine}</p>
-          <p className="details">{member.address.city}</p>
+          <p className="smaller mt-12">{member.address.addressLine}</p>
+          <p className="smaller">{member.address.city}</p>
         </StyledAddressBox>
       </StyledMemberCard>
     </StyledLink>
   );
 };
 
-export default MemberCard;
+export default MemberListCard;
 
 const StyledMemberCard = styled.div`
   padding: 32px 16px;
@@ -53,8 +54,14 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
+const StyledName = styled.div`
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 700;
+`;
+
 const StyledAddressBox = styled.div`
-  .details {
+  .smaller {
     font-size: 12px;
     font-weight: 500;
   }

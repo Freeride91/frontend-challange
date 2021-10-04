@@ -2,11 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { Member } from "./MembersListPage";
+import { Member } from "./MembersList";
 import Queries from "../api/Queries";
 import { Link } from "react-router-dom";
 import { ReactComponent as ChevronLeft } from "../assets/chevron-left.svg";
 import { theme } from "../theme/theme";
+import { ErrorMessageWrapper } from "../components/UIComponents";
+import Loading from "../components/Loading";
 
 interface MemberData {
   member: Member;
@@ -21,6 +23,9 @@ const MemberDetailsPage = () => {
     },
   });
 
+  if (error) return <ErrorMessageWrapper>Unfortunately an error occured! :(</ErrorMessageWrapper>;
+  if (loading) return <Loading />;
+
   return (
     <>
       <StyledPageContent>
@@ -34,44 +39,44 @@ const MemberDetailsPage = () => {
             </BoxHeader>
             <BoxContent>
               <div className="image-container">
-                <img src={data.member.profilePictureUrl} alt="profile" />
+                <img src={data?.member.profilePictureUrl} alt="profile" />
               </div>
 
               <DataLine>
                 <LeftData>First Name</LeftData>
-                <RightData>{data.member.firstName}</RightData>
+                <RightData>{data?.member.firstName}</RightData>
               </DataLine>
               <DataLine>
                 <LeftData>Last Name</LeftData>
-                <RightData>{data.member.lastName}</RightData>
+                <RightData>{data?.member.lastName}</RightData>
               </DataLine>
               <DataLine>
                 <LeftData>E-mail</LeftData>
-                <RightData>{data.member.email}</RightData>
+                <RightData>{data?.member.email}</RightData>
               </DataLine>
               <DataLine>
                 <LeftData>Phone Number</LeftData>
-                <RightData>{data.member.phoneNumber}</RightData>
+                <RightData>{data?.member.phoneNumber}</RightData>
               </DataLine>
               <DataLine>
                 <LeftData>Country</LeftData>
-                <RightData>{data.member.address.country}</RightData>
+                <RightData>{data?.member.address.country}</RightData>
               </DataLine>
               <DataLine>
                 <LeftData>State</LeftData>
-                <RightData>{data.member.address.state}</RightData>
+                <RightData>{data?.member.address.state}</RightData>
               </DataLine>
               <DataLine>
                 <LeftData>City</LeftData>
-                <RightData>{data.member.address.city}</RightData>
+                <RightData>{data?.member.address.city}</RightData>
               </DataLine>
               <DataLine>
                 <LeftData>Postal Code</LeftData>
-                <RightData>{data.member.address.postalCode}</RightData>
+                <RightData>{data?.member.address.postalCode}</RightData>
               </DataLine>
               <DataLine>
                 <LeftData>Address</LeftData>
-                <RightData>{data.member.address.addressLine}</RightData>
+                <RightData>{data?.member.address.addressLine}</RightData>
               </DataLine>
             </BoxContent>
           </StyledMemberDetailsBox>

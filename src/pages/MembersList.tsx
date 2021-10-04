@@ -2,15 +2,16 @@ import { useState, useEffect, useContext } from "react";
 import { useQuery } from "@apollo/client";
 import StatesFilter from "../components/StatesFilter";
 import styled from "styled-components";
-import MemberCard from "../components/MemberCard";
+import MemberListCard from "../components/MemberListCard";
 import { H1 } from "../components/Typography";
 import { topKFrequent } from "../utils/utils";
-
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Queries from "../api/Queries";
 import { SearchBy, SearchContext } from "../App";
+import { ErrorMessageWrapper } from "../components/UIComponents";
+import Loading from "../components/Loading";
 
 enum OrderBy {
   none = "none",
@@ -109,8 +110,8 @@ function MembersListPage() {
     );
   }
 
-  if (loading) return <H1>Loading...</H1>;
-  if (error) return <H1>Error!</H1>;
+  if (error) return <ErrorMessageWrapper>Unfortunately an error occured! :(</ErrorMessageWrapper>;
+  if (loading) return <Loading />;
 
   return (
     <>
@@ -125,7 +126,7 @@ function MembersListPage() {
         <StyledListSection>
           <StyledListHeaderBox>
             <span className="itemnum-info">
-              Showing {membersToBeRendered.length} of {data?.allMembers.length} items{" "}
+              Showing {membersToBeRendered.length} of {data?.allMembers.length} items
             </span>
             <div className="sorting-wrapper">
               <span className="order">Order:</span>
@@ -141,7 +142,7 @@ function MembersListPage() {
 
           <StyledMemberListGrid>
             {membersToBeRendered?.map((member: Member) => (
-              <MemberCard key={member.id} member={member} />
+              <MemberListCard key={member.id} member={member} />
             ))}
           </StyledMemberListGrid>
         </StyledListSection>

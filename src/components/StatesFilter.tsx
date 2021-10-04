@@ -18,7 +18,9 @@ const StatesFilter = ({ allUniqueStates, mostFrequentStates, activeFilter, onFil
         </StyledCheckboxWrapper>
       ))}
 
-      <StyledShowAllToggler className="mt-8" onClick={() => setIsShowAll(!isShowAll)}>{!isShowAll ? "All" : "Less"}</StyledShowAllToggler>
+      <StyledShowAllToggler className="mt-8" onClick={() => setIsShowAll(!isShowAll)}>
+        {!isShowAll ? "All" : "Less"}
+      </StyledShowAllToggler>
     </StyledFilterCard>
   );
 };

@@ -1,11 +1,12 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import MembersListPage from "./pages/MembersListPage";
+import MembersList from "./pages/MembersList";
+import MemberDetails from "./pages/MemberDetails";
 import styled from "styled-components";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import MemberDetailsPage from "./pages/MemberDetailsPage";
+import { theme } from "./theme/theme";
 
 const client = new ApolloClient({
   uri: "https://cooltix-frontend-challenge.herokuapp.com",
@@ -41,21 +42,24 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <SearchContext.Provider value={{ searchTermGlobal, setSearchTermGlobal, isSearchBarEnabled, setIsSearchBarEnabled, searchBy: SearchBy.name }}>
-        <Header />
-        <StyledPageContainer>
-          <Router>
-            <Switch>
-              <Route path="/:id">
-                <MemberDetailsPage />
-              </Route>
-              <Route path="/">
-                <MembersListPage />
-              </Route>
-            </Switch>
-          </Router>
-        </StyledPageContainer>
+        <StyledMainContainer>
+          <Header />
 
-        <Footer />
+          <StyledPageContainer>
+            <Router>
+              <Switch>
+                <Route path="/:id">
+                  <MemberDetails />
+                </Route>
+                <Route path="/">
+                  <MembersList />
+                </Route>
+              </Switch>
+            </Router>
+          </StyledPageContainer>
+
+          <Footer />
+        </StyledMainContainer>
       </SearchContext.Provider>
     </ApolloProvider>
   );
@@ -63,9 +67,17 @@ function App() {
 
 export default App;
 
+const StyledMainContainer = styled.div`
+  min-height: 100vh;
+  position: relative;
+`;
+
 const StyledPageContainer = styled.main`
   width: 100%;
   max-width: 1136px;
-  padding: 64px 32px;
+  padding-top: 64px;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-bottom: ${theme.size.footerHeight + 64}px;
   margin: 0 auto;
 `;

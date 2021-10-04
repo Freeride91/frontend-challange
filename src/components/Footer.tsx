@@ -4,6 +4,7 @@ import { ReactComponent as Facebook } from "../assets/Facebook.svg";
 import { ReactComponent as Instagram } from "../assets/Instagram.svg";
 import { ReactComponent as LinkedIn } from "../assets/LinkedIn.svg";
 import styled from "styled-components";
+import { theme } from "../theme/theme";
 
 const Footer = () => {
   return (
@@ -24,8 +25,10 @@ export default Footer;
 
 const StyledFooter = styled.footer`
   position: absolute;
+  bottom: 0;
+  height: ${theme.size.footerHeight}px;
+
   width: 100%;
-  height: 296px;
   padding: 32px 40px;
 
   background: #1d1d1d;
