@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useQuery } from "@apollo/client";
 import StatesFilter from "../components/StatesFilter";
 import styled from "styled-components";
@@ -10,6 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Queries from "../api/Queries";
+import { SearchBy, SearchContext } from "../App";
 
 enum OrderBy {
   none = "none",
@@ -40,13 +41,23 @@ interface MembersData {
 }
 
 function MembersListPage() {
-  const { loading, error, data } = useQuery<MembersData>(Queries.ALL_MEMBERS);
+  const { loading, error, data } = useQuery<MembersData>(Queries.allMembers);
 
   const [uniqueStates, setUniqueStates] = useState<string[]>([]);
   const [mostFrequentStates, setMostFrequentStates] = useState<string[]>([]);
 
   const [orderBy, setOrderBy] = useState<OrderBy>(OrderBy.none);
   const [activeFilter, setActiveFilter] = useState<Array<string>>([]);
+
+  const { searchBy, searchTermGlobal } = useContext(SearchContext);
+
+  const { setIsSearchBarEnabled } = useContext(SearchContext);
+
+  useEffect(() => {
+    setIsSearchBarEnabled(true);
+
+    return () => setIsSearchBarEnabled(false);
+  }, [setIsSearchBarEnabled]);
 
   useEffect(() => {
     if (!loading && !error && data) {
@@ -88,6 +99,14 @@ function MembersListPage() {
 
   if (activeFilter.length !== 0) {
     membersToBeRendered = membersToBeRendered.filter((member) => activeFilter.includes(member.address.state));
+  }
+
+  if (searchBy === SearchBy.name && searchTermGlobal) {
+    membersToBeRendered = membersToBeRendered.filter(
+      (member) =>
+        member.firstName.toLowerCase().includes(searchTermGlobal.toLowerCase().trim()) ||
+        member.lastName.toLowerCase().includes(searchTermGlobal.toLowerCase().trim())
+    );
   }
 
   if (loading) return <H1>Loading...</H1>;

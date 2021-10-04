@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ReactComponent as CooltixLogo } from "../assets/logo.svg";
 import styled from "styled-components";
 import { theme } from "../theme/theme";
+import SearchBox from "./SearchBox";
+import { SearchContext } from "../App";
 
 const Header = () => {
+  const { isSearchBarEnabled } = useContext(SearchContext);
+
   return (
     <StyledHeader>
       <StyledHeaderContainer>
         <CooltixLogo />
-        <StyledTextPlaceholder />
+        <RightWrapper>
+          {isSearchBarEnabled && <SearchBox />}
+          <StyledTextPlaceholder />
+          <StyledTextPlaceholder />
+        </RightWrapper>
       </StyledHeaderContainer>
     </StyledHeader>
   );
 };
 
 export default Header;
-
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -35,9 +42,15 @@ const StyledHeaderContainer = styled.div`
   justify-content: space-between;
 `;
 
+const RightWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const StyledTextPlaceholder = styled.div`
-  width: 176px;
+  width: 146px;
   height: 16px;
   background: #d8d8d8;
   border-radius: 32px;
+  margin-left: 16px;
 `;
