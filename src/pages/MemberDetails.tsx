@@ -13,9 +13,12 @@ import Loading from "../components/Loading";
 interface MemberData {
   member: Member;
 }
+interface RouteParams {
+  id: string
+}
 
 const MemberDetailsPage = () => {
-  let { id } = useParams();
+  let { id } = useParams<RouteParams>();
 
   const { loading, error, data } = useQuery<MemberData>(Queries.memberById, {
     variables: {
@@ -33,7 +36,7 @@ const MemberDetailsPage = () => {
           <StyledMemberDetailsBox>
             <BoxHeader>
               <BackLinkHeader to="/">
-                <ChevronLeft height={24} />
+                <ChevronLeft height={20} />
               </BackLinkHeader>
               Member Details
             </BoxHeader>
@@ -104,12 +107,14 @@ const StyledMemberDetailsBox = styled.div`
 `;
 
 const BoxHeader = styled.div`
-  background: ${theme.colors.deepBlue};
+  /* background: ${theme.colors.deepBlue};
+  background: #6456b3; */
+  background: #5442b7;
   width: 100%;
   color: white;
   font-size: 22px;
-  letter-spacing: -0.02em;
-  height: 60px;
+  /* letter-spacing: -0.02em; */
+  height: 48px;
   font-weight: 500;
 
   display: flex;
@@ -122,7 +127,7 @@ const BoxHeader = styled.div`
 const BackLinkHeader = styled(Link)`
   position: absolute;
   left: 14px;
-  top: 10px;
+  top: 5px;
 
   border: none;
   padding: 8px;
@@ -150,7 +155,6 @@ const BoxContent = styled.div`
 const DataLine = styled.div`
   height: 44px;
   width: 100%;
-  color: #445691;
 
   display: flex;
   flex-direction: row;
@@ -161,13 +165,15 @@ const DataLine = styled.div`
 const LeftData = styled.div`
   width: 40%;
   font-weight: 500;
-  color: #5b71b6;
+  color: #513eb7;
 `;
+
 const RightData = styled.div`
   width: 60%;
   font-weight: 700;
-  border-left: 1px solid #787dde;
+  border-left: 1px solid #e9e9e9;
   padding-left: 8px;
+  color: #484848;
 `;
 
 const BackLink = styled(Link)`
@@ -176,13 +182,13 @@ const BackLink = styled(Link)`
   font-size: 20px;
   font-weight: 500;
   margin-top: 40px;
-  color: #ff469f;
+  color: #d82079;
 
-  border-bottom: 1px solid #ff469f;
+  border-bottom: 1px solid #d82079;
 
   :hover {
-    color: #8a0444;
-    border-color: #8a0444;
+    color: #FF469F;
+    border-color: #FF469F;
   }
 `;
 

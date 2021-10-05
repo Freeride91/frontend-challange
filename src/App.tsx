@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { theme } from "./theme/theme";
+import ScrollToTop from "./components/ScrollToTop";
 
 const client = new ApolloClient({
   uri: "https://cooltix-frontend-challenge.herokuapp.com",
@@ -47,6 +48,7 @@ function App() {
 
           <StyledPageContainer>
             <Router>
+              <ScrollToTop />
               <Switch>
                 <Route path="/:id">
                   <MemberDetails />

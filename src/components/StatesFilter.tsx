@@ -3,7 +3,14 @@ import styled from "styled-components";
 import { H3 } from "./Typography";
 import { useState } from "react";
 
-const StatesFilter = ({ allUniqueStates, mostFrequentStates, activeFilter, onFilterChange }) => {
+type StatesFilterProps = {
+  allUniqueStates: string[];
+  mostFrequentStates: string[];
+  activeFilter: string[];
+  onFilterChange: (stateName: string) => void;
+};
+
+const StatesFilter: React.FC<StatesFilterProps> = ({ allUniqueStates, mostFrequentStates, activeFilter, onFilterChange }) => {
   const [isShowAll, setIsShowAll] = useState<boolean>(false);
 
   const statesToRender = isShowAll ? allUniqueStates : mostFrequentStates;

@@ -69,11 +69,11 @@ function MembersListPage() {
     }
   }, [loading, error, data]);
 
-  const handleOrderSelect = (e) => {
-    setOrderBy(e.target.value);
+  const handleOrderSelect = (e: React.ChangeEvent<{ value: unknown }>) => {
+    setOrderBy(e.target.value as OrderBy);
   };
 
-  const onFilterChange = (stateName) => {
+  const onFilterChange = (stateName: string) => {
     if (activeFilter.includes(stateName)) {
       const index = activeFilter.indexOf(stateName);
       const newAcitveFilter = [...activeFilter];

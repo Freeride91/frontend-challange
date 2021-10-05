@@ -1,34 +1,37 @@
 import styled from "styled-components";
-import { H3 } from "./Typography";
 import { Member } from "../pages/MembersList";
 import { Link } from "react-router-dom";
-import { theme } from "../theme/theme";
 
-type MemberCardProps = {
+type MemberListCardProps = {
   member: Member;
 };
 
-const MemberListCard: React.FC<MemberCardProps> = ({ member }) => {
+const MemberListCard: React.FC<MemberListCardProps> = ({ member }) => {
   return (
     <StyledLink to={`/${member.id}`}>
-      <StyledMemberCard>
+      <StyledMemberListCard>
         <img src={member.profilePictureUrl} alt="member" />
         <StyledName className="mt-12">
           {member.firstName} {member.lastName}
         </StyledName>
         <StyledAddressBox>
-          <p className="mt-16">{member.address.state}</p>
-          <p className="smaller mt-12">{member.address.addressLine}</p>
-          <p className="smaller">{member.address.city}</p>
+          <div className="state mt-16">{member.address.state}</div>
+          <div className="address mt-12">{member.address.addressLine}</div>
+          <div className="address">{member.address.city}</div>
         </StyledAddressBox>
-      </StyledMemberCard>
+        <StyledBottomDecorator />
+      </StyledMemberListCard>
     </StyledLink>
   );
 };
 
 export default MemberListCard;
 
-const StyledMemberCard = styled.div`
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const StyledMemberListCard = styled.div`
   padding: 32px 16px;
   min-width: 200px;
   background-color: white;
@@ -40,18 +43,19 @@ const StyledMemberCard = styled.div`
   align-items: center;
   text-align: center;
 
+  transition: all 0.2s;
+
+  position: relative;
+  overflow: hidden;
+
   img {
     max-width: 80px;
     border-radius: 50%;
   }
 
   :hover {
-    box-shadow: 0px 0px 6px rgba(167, 90, 255, 0.322);
+    box-shadow: 0px 0px 6px rgba(84, 52, 255, 0.322);
   }
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
 `;
 
 const StyledName = styled.div`
@@ -61,8 +65,22 @@ const StyledName = styled.div`
 `;
 
 const StyledAddressBox = styled.div`
-  .smaller {
-    font-size: 12px;
-    font-weight: 500;
+  font-weight: 500;
+
+  .state {
+    color: #2f1f84;
   }
+
+  .address {
+    font-size: 12px;
+  }
+`;
+
+const StyledBottomDecorator = styled.div`
+  position: absolute;
+  bottom: 0;
+  background-color: #9b92d3;
+
+  width: 100%;
+  height: 8px;
 `;

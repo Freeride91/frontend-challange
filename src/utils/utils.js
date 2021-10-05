@@ -1,4 +1,4 @@
-export function topKFrequent(elements: string[], k: number) {
+export function topKFrequent(elements, k) {
   let hash = {};
 
   for (let elem of elements) {
@@ -6,7 +6,7 @@ export function topKFrequent(elements: string[], k: number) {
     hash[elem]++;
   }
 
-  const hashToArray: Array<[string, number]> = Object.entries(hash);
+  const hashToArray = Object.entries(hash);
 
   const sortedArray = hashToArray.sort((a, b) => b[1] - a[1]);
   const firstKofArray = sortedArray.slice(0, k);

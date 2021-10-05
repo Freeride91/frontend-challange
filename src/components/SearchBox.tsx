@@ -7,7 +7,7 @@ const SearchBox = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const { searchBy, setSearchTermGlobal } = useContext(SearchContext);
 
-  const handleSearchInputChange = (e) => {
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     setSearchTermGlobal(e.target.value);
   };
