@@ -6,7 +6,6 @@ import { Member } from "./MembersList";
 import Queries from "../api/Queries";
 import { Link } from "react-router-dom";
 import { ReactComponent as ChevronLeft } from "../assets/chevron-left.svg";
-import { theme } from "../theme/theme";
 import { ErrorMessageWrapper } from "../components/UIComponents";
 import Loading from "../components/Loading";
 import { fadeIn } from "../utils/utils";
