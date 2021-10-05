@@ -25,9 +25,11 @@ const StatesFilter: React.FC<StatesFilterProps> = ({ allUniqueStates, mostFreque
         </StyledCheckboxWrapper>
       ))}
 
-      <StyledShowAllToggler className="mt-8" onClick={() => setIsShowAll(!isShowAll)}>
-        {!isShowAll ? "All" : "Less"}
-      </StyledShowAllToggler>
+      {!isShowAll && (
+        <StyledShowAllToggler className="mt-8" onClick={() => setIsShowAll(true)}>
+          All
+        </StyledShowAllToggler>
+      )}
     </StyledFilterCard>
   );
 };
@@ -44,7 +46,6 @@ const StyledFilterCard = styled.div`
   padding: 24px 16px 24px 24px;
   background-color: white;
   border-radius: 8px;
-  /* border: 1px solid #e5e5e5; */
 `;
 
 const StyledCheckboxWrapper = styled.div`

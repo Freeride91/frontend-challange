@@ -106,7 +106,8 @@ function MembersListPage() {
     membersToBeRendered = membersToBeRendered.filter(
       (member) =>
         member.firstName.toLowerCase().includes(searchTermGlobal.toLowerCase().trim()) ||
-        member.lastName.toLowerCase().includes(searchTermGlobal.toLowerCase().trim())
+        member.lastName.toLowerCase().includes(searchTermGlobal.toLowerCase().trim()) ||
+        `${member.firstName} ${member.lastName}`.toLowerCase().includes(searchTermGlobal.toLowerCase().trim())
     );
   }
 
@@ -141,7 +142,7 @@ function MembersListPage() {
           </StyledListHeaderBox>
 
           <StyledMemberListGrid>
-            {membersToBeRendered?.map((member: Member) => (
+            {membersToBeRendered.map((member: Member) => (
               <MemberListCard key={member.id} member={member} />
             ))}
           </StyledMemberListGrid>

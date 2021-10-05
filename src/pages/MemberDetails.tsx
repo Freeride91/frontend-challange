@@ -9,12 +9,13 @@ import { ReactComponent as ChevronLeft } from "../assets/chevron-left.svg";
 import { theme } from "../theme/theme";
 import { ErrorMessageWrapper } from "../components/UIComponents";
 import Loading from "../components/Loading";
+import { fadeIn } from "../utils/utils";
 
 interface MemberData {
   member: Member;
 }
 interface RouteParams {
-  id: string
+  id: string;
 }
 
 const MemberDetailsPage = () => {
@@ -33,7 +34,7 @@ const MemberDetailsPage = () => {
     <>
       <StyledPageContent>
         {data?.member && (
-          <StyledMemberDetailsBox>
+          <StyledMemberDetailsCard>
             <BoxHeader>
               <BackLinkHeader to="/">
                 <ChevronLeft height={20} />
@@ -82,7 +83,7 @@ const MemberDetailsPage = () => {
                 <RightData>{data?.member.address.addressLine}</RightData>
               </DataLine>
             </BoxContent>
-          </StyledMemberDetailsBox>
+          </StyledMemberDetailsCard>
         )}
 
         <BackLink to="/"> ← Back To All</BackLink>
@@ -97,7 +98,10 @@ const StyledPageContent = styled.div`
   align-items: center;
 `;
 
-const StyledMemberDetailsBox = styled.div`
+const StyledMemberDetailsCard = styled.div`
+  animation-name: ${fadeIn};
+  animation-duration: 0.5s;
+
   background: white;
   border-radius: 24px;
   width: 100%;
@@ -107,13 +111,10 @@ const StyledMemberDetailsBox = styled.div`
 `;
 
 const BoxHeader = styled.div`
-  /* background: ${theme.colors.deepBlue};
-  background: #6456b3; */
   background: #5442b7;
   width: 100%;
   color: white;
   font-size: 22px;
-  /* letter-spacing: -0.02em; */
   height: 48px;
   font-weight: 500;
 
@@ -187,8 +188,8 @@ const BackLink = styled(Link)`
   border-bottom: 1px solid #d82079;
 
   :hover {
-    color: #FF469F;
-    border-color: #FF469F;
+    color: #ff469f;
+    border-color: #ff469f;
   }
 `;
 

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Member } from "../pages/MembersList";
 import { Link } from "react-router-dom";
+import { fadeIn } from "../utils/utils";
 
 type MemberListCardProps = {
   member: Member;
@@ -27,13 +28,16 @@ const MemberListCard: React.FC<MemberListCardProps> = ({ member }) => {
 
 export default MemberListCard;
 
+
 const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
 const StyledMemberListCard = styled.div`
+  animation-name: ${fadeIn};
+  animation-duration: 0.5s;
+
   padding: 32px 16px;
-  min-width: 200px;
   background-color: white;
   color: #2e2e2e;
   border-radius: 12px;
