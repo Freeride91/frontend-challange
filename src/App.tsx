@@ -10,7 +10,7 @@ import { theme } from "./theme/theme";
 import ScrollToTop from "./components/ScrollToTop";
 
 const client = new ApolloClient({
-  uri: "https://cooltix-frontend-challenge.herokuapp.com",
+  uri: "https://frontend-challenge.dev.cooltix.com/",
   cache: new InMemoryCache(),
 });
 

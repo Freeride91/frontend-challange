@@ -19,15 +19,15 @@ enum OrderBy {
   lastName = "lastName",
 }
 
-interface MemberAddress {
+type MemberAddress = {
   country: string;
   state: string;
   postalCode: string;
   city: string;
   addressLine: string;
-}
+};
 
-export interface Member {
+export type Member = {
   id: string;
   firstName: string;
   lastName: string;
@@ -35,11 +35,11 @@ export interface Member {
   address: MemberAddress;
   phoneNumber: string;
   profilePictureUrl: string;
-}
+};
 
-interface MembersData {
+type MembersData = {
   allMembers: Member[];
-}
+};
 
 function MembersListPage() {
   const { loading, error, data } = useQuery<MembersData>(Queries.allMembers);
